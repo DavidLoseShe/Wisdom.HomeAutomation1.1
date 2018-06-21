@@ -1,0 +1,93 @@
+﻿<Window x:Class="AgileToDo.UMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="UMessageBox" Height="130" Width="350" WindowStyle="None"   Background="{x:Null}"  
+        ResizeMode="NoResize"  x:Name="main"
+        AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded" >
+            <BeginStoryboard>
+                <Storyboard Name="sbOpShow">
+                    <DoubleAnimation
+                        Storyboard.TargetName="main" 
+                        Storyboard.TargetProperty="Opacity" 
+                        From="0" To="1" Duration="0:0:0.5"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="Ok">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <Label x:Name="lable" Content="{TemplateBinding Content}" HorizontalAlignment="Center" Foreground="#FF146E62"
+                                   VerticalAlignment="Center" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="true">
+
+                                <Setter TargetName="lable" Property="Foreground" Value="#FF167A6C" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="false">
+
+                                <Setter TargetName="lable" Property="Foreground" Value="#FF268E80" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="lable" Property="Foreground" Value="#FFD4D1D1" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="Cancel">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <Label x:Name="lable" Content="{TemplateBinding Content}" HorizontalAlignment="Center" Foreground="#FF9C411C "
+                               VerticalAlignment="Center" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="true">
+
+                                <Setter TargetName="lable" Property="Foreground" Value="#FFEA8257" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="false">
+
+                                <Setter TargetName="lable" Property="Foreground" Value="#FFE35E27 " />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="lable" Property="Foreground" Value="#FFD4D1D1" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="#FFFFFFFF" BorderThickness="2" BorderBrush="#FF4AB6A7"  CornerRadius="8" MouseMove="TitleBar_MouseMove">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="Image" Margin="10" Grid.Column="0" Source="Img/error.png" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"></Image>
+            <TextBlock Margin="5" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="0" x:Name="Msg"
+                       Foreground="Black" FontSize="14" VerticalAlignment="Center" 
+                       TextWrapping="Wrap" Text="test"
+                       HorizontalAlignment="Left" />
+            <Button Name="BtnOk" Grid.Row="1" Grid.Column="2" FontSize="16" Style="{StaticResource Ok}" Visibility="Hidden" Click="ButtonBase_OnClick" Content="确定"  />
+            <Button Name="BtnOk1" Grid.Row="1" Grid.Column="3" FontSize="16" Style="{StaticResource Ok}" Click="ButtonBase_OnClick" Content="确定"  />
+            <Button Name="BtnCancel" Grid.Row="1" Grid.Column="4" FontSize="16" Style="{StaticResource Cancel}" Click="ButtonBase_OnClick1" Content="取消"  />
+        </Grid>
+    </Border>
+</Window>

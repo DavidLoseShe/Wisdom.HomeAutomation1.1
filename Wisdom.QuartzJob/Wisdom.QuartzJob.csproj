@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C8E499AD-F52D-400C-BD06-69C06C261EC5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Wisdom.QuartzJob</RootNamespace>
+    <AssemblyName>Wisdom.QuartzJob</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.3.1\lib\net40\Common.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.3.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.3.1\lib\net40\Common.Logging.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Quartz, Version=2.6.0.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.2.6.0\lib\net40\Quartz.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Wisdom.Utils, Version=1.0.8.0, Culture=neutral, PublicKeyToken=7735f452a0972076, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wisdom.Utils.1.0.8\lib\Wisdom.Utils.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Wisdom.Utils.Driver, Version=1.1.1.0, Culture=neutral, PublicKeyToken=7735f452a0972076, processorArchitecture=MSIL">
+      <HintPath>..\packages\Wisdom.Utils.Driver.1.1.1\lib\Wisdom.Utils.Driver.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="OpenDevice.cs" />
+    <Compile Include="QuartzHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="job_scheduling_data_2_0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Wisdom.HomeAutomation.Rs485Drivers\Wisdom.HomeAutomation.Rs485Drivers.csproj">
+      <Project>{2a9c2c2a-ede7-40f1-ac14-f78aec628864}</Project>
+      <Name>Wisdom.HomeAutomation.Rs485Drivers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Wisdom.HomeAutomation.Sw16Drivers\Wisdom.HomeAutomation.Sw16Drivers.csproj">
+      <Project>{29163a59-7767-45be-9317-988b31a681ea}</Project>
+      <Name>Wisdom.HomeAutomation.Sw16Drivers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Wisdom.Utils.1.0.8\build\Wisdom.Utils.targets" Condition="Exists('..\packages\Wisdom.Utils.1.0.8\build\Wisdom.Utils.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此项目引用这台计算机上缺少的 NuGet 程序包。使用 NuGet 程序包还原可下载这些程序包。有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Wisdom.Utils.1.0.8\build\Wisdom.Utils.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Wisdom.Utils.1.0.8\build\Wisdom.Utils.targets'))" />
+    <Error Condition="!Exists('..\packages\Wisdom.Utils.Driver.1.1.1\build\Wisdom.Utils.Driver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Wisdom.Utils.Driver.1.1.1\build\Wisdom.Utils.Driver.targets'))" />
+  </Target>
+  <Import Project="..\packages\Wisdom.Utils.Driver.1.1.1\build\Wisdom.Utils.Driver.targets" Condition="Exists('..\packages\Wisdom.Utils.Driver.1.1.1\build\Wisdom.Utils.Driver.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

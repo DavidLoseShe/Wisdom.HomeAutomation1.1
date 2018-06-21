@@ -1,0 +1,436 @@
+﻿<Window x:Class="Wisdom.HomeAutomation.WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controller="clr-namespace:Wisdom.HomeAutomation.WpfApp.Controller"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        MinHeight="768" MinWidth="1024" Height="768" Width="1024" WindowStartupLocation="CenterScreen" 
+        DataContext="{Binding Main,Source={StaticResource Locator}}"  WindowStyle="None" AllowsTransparency="True" BorderThickness="0">
+    <Window.Resources>
+
+        <Style TargetType="{x:Type Button}" x:Key="BtnMin">
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Width" Value="20" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image Name="img"  Source="Img/min.png"></Image>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="img" Property="Width" Value="18" />
+                                <Setter TargetName="img" Property="Height" Value="18" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type CheckBox}" x:Key="BtnRe">
+            <Setter Property="Height" Value="17" />
+            <Setter Property="Width" Value="17" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Image Name="img"  Source="Img/Rectangle 2.png"></Image>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="img" Property="Width" Value="15" />
+                                <Setter TargetName="img" Property="Height" Value="15" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="BtnClose">
+            <Setter Property="Height" Value="20" />
+            <Setter Property="Width" Value="20" />
+            <Setter Property="Background" Value="#FF27ADA3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image Name="img"  Source="Img/close.png"></Image>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="img" Property="Width" Value="18" />
+                                <Setter TargetName="img" Property="Height" Value="18" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="BtnStart">
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Width" Value="90" />
+            <Setter Property="Background" Value="#FF27ADA3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderThickness="1" BorderBrush="#FF218D85" CornerRadius="8,8,8,8"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                Padding="{TemplateBinding Padding}"
+                                Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <Label x:Name="lable" Content="{Binding SchemeBtnName}" HorizontalAlignment="Center" Foreground="#FF27ADA3"
+                                   VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="#FFF5F9F9" />
+
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="#FF218D85" />
+                                <Setter TargetName="lable" Property="Foreground" Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="#FF27ADA3" />
+                                <Setter TargetName="lable" Property="Foreground" Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="#FF2F8B84" />
+                                <Setter TargetName="lable" Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="BtnEnd">
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Width" Value="75" />
+            <Setter Property="Background" Value="#FF27ADA3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderThickness="1" BorderBrush="#FF218D85" CornerRadius="8,8,8,8"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                Padding="{TemplateBinding Padding}"
+                                Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <Label x:Name="lable" Content="停止" HorizontalAlignment="Center" Foreground="#FF27ADA3"
+                                   VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="#FFF5F9F9" />
+
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="#FF218D85" />
+                                <Setter TargetName="lable" Property="Foreground" Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="#FF27ADA3" />
+                                <Setter TargetName="lable" Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="BtnScheme">
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Width" Value="75" />
+            <Setter Property="Background" Value="#FF27ADA3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderThickness="1" BorderBrush="#FF218D85" CornerRadius="8,8,8,8"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                Padding="{TemplateBinding Padding}"
+                                Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <Label x:Name="lable" Content="新建方案" HorizontalAlignment="Center" Foreground="#FF27ADA3"
+                                   VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="#FFF5F9F9" />
+
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="#FF218D85" />
+                                <Setter TargetName="lable" Property="Foreground" Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="#FF27ADA3" />
+                                <Setter TargetName="lable" Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="BtnSave">
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Width" Value="75" />
+            <Setter Property="Background" Value="#FF27ADA3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderThickness="1" BorderBrush="#FF218D85" CornerRadius="8,8,8,8"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                Padding="{TemplateBinding Padding}"
+                                Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <Label x:Name="lable" Content="{Binding ButtonNameSave}" HorizontalAlignment="Center"
+                                   Foreground="#FF27ADA3"
+                                   VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="#FFF5F9F9" />
+
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="#FF218D85" />
+                                <Setter TargetName="lable" Property="Foreground" Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="#FFFBFFFF" />
+                                <Setter TargetName="lable" Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="BtnUpdate">
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Width" Value="75" />
+            <Setter Property="Background" Value="#FF27ADA3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderThickness="1" BorderBrush="#FF218D85" CornerRadius="8,8,8,8"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                Padding="{TemplateBinding Padding}"
+                                Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <Label x:Name="lable" Content="更新定时" HorizontalAlignment="Center" Foreground="#FF27ADA3"
+                                   VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="#FFF5F9F9" />
+
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="#FF218D85" />
+                                <Setter TargetName="lable" Property="Foreground" Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="#FFFBFFFF" />
+                                <Setter TargetName="lable" Property="Foreground" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}" x:Key="BtnDelete">
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Width" Value="75" />
+            <Setter Property="Background" Value="#FF27ADA3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderThickness="1" BorderBrush="#FF218D85" CornerRadius="8,8,8,8"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                Padding="{TemplateBinding Padding}"
+                                Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                            <Label x:Name="lable" Content="删除定时" HorizontalAlignment="Center" Foreground="#FF27ADA3"
+                                   VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="#FFF5F9F9" />
+
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="border" Property="Background" Value="#FF218D85" />
+                                <Setter TargetName="lable" Property="Foreground" Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="false">
+                                <Setter TargetName="border" Property="Background" Value="#FF27ADA3" />
+                                <Setter TargetName="lable" Property="Foreground" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="Height" Value="80" />
+            <Setter Property="Width" Value="60" />
+            <Setter Property="VerticalAlignment" Value="top" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="Margin" Value="10,15,5,10" />
+        </Style>
+        <Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+        <ControlTemplate TargetType="{x:Type RadioButton}" x:Key="Item1">
+            <Grid Background="Transparent" x:Name="grid" Margin="0">
+                <Border x:Name="border"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"
+                        Grid.Row="0"
+                        Height="100">
+                    <Grid Margin="0">
+                        <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0"
+                                Height="100" Width="80">
+                            <Grid x:Name="bg">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Image Grid.Row="1" Grid.RowSpan="2" Name="img1" Source="Img/jiadianjiankong.png"
+                                       Width="auto" Height="25"
+                                       VerticalAlignment="Stretch" />
+                                <Label Grid.Row="3" Grid.RowSpan="2" Name="lable" VerticalAlignment="Bottom"
+                                       Foreground="White" Content="家电监控" FontSize="16"
+                                       VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                       HorizontalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="true">
+                    <Setter TargetName="bg" Property="Background" Value="#FF16938A" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate TargetType="{x:Type RadioButton}" x:Key="Item2">
+            <Grid Background="Transparent" x:Name="grid">
+                <Border x:Name="border" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0"
+                        Margin="1"
+                        Height="100" Width="80">
+                    <Grid x:Name="bg">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Image Grid.Row="1" Grid.RowSpan="2" Name="img1" Source="Img/dianbiaojindu.png" Width="auto"
+                               Height="25" />
+                        <Label Grid.Row="3" Grid.RowSpan="2" Name="lable" VerticalAlignment="Bottom" Foreground="White"
+                               Content="家电方案" FontSize="16"
+                               VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                               HorizontalAlignment="Center" />
+                    </Grid>
+                </Border>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="true">
+                    <Setter TargetName="bg" Property="Background" Value="#FF16938A" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate TargetType="{x:Type RadioButton}" x:Key="Item3">
+            <Grid Background="Transparent" x:Name="grid">
+                <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" Margin="1"
+                        Height="100" Width="80">
+                    <StackPanel Orientation="Horizontal">
+                        <Grid x:Name="bg">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="1" Grid.RowSpan="2" Name="img1" Source="Img/shezhi.png" Width="auto"
+                                   Height="25"
+                                   VerticalAlignment="Stretch" />
+                            <Label Grid.Row="3" Grid.RowSpan="2" Name="lable" VerticalAlignment="Bottom"
+                                   Foreground="White" Content="    设置    " FontSize="16"
+                                   VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                                   HorizontalAlignment="Center" />
+                        </Grid>
+
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="true">
+                    <Setter TargetName="bg" Property="Background" Value="#FF16938A" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid  Background="#FF27ADA3" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="8*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="0"  MouseMove="TitleBar_MouseMove">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Grid.ColumnSpan="2" Source="Img/logo.png" Margin="5,5,2,5" />
+            <Grid  Grid.Column="3" Grid.ColumnSpan="3">
+                <StackPanel MinWidth="300" Orientation="Horizontal">
+                    <RadioButton Name="RadioButton1" Template="{StaticResource Item1}" Click="ButtonBase_OnClick"
+                                 Tag="0" />
+                    <RadioButton Template="{StaticResource Item2}" Click="ButtonBase_OnClick" Tag="1" />
+                    <RadioButton Template="{StaticResource Item3}" Click="ButtonBase_OnClick" Tag="2" />
+                </StackPanel>
+            </Grid>
+            <Grid  Grid.Column="6" HorizontalAlignment="Right">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row="0" Grid.Column="2"  Margin="2" Style="{StaticResource BtnMin}" Click="btn_min_Click"></Button>
+                <CheckBox Grid.Row="0" Grid.Column="3" IsChecked="False"  Margin="2" Click="btn_max_Click" Style="{StaticResource BtnRe}"></CheckBox>
+                <Button Grid.Row="0" Grid.Column="4"  Margin="2" Click="btn_close_Click" Style="{StaticResource BtnClose}"></Button>
+                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Content="版本号：2018.04.25" FontSize="14" Foreground="White" />
+            </Grid>
+        </Grid>
+        <TabControl Grid.Row="1" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                    Background="#00FFFFFF" Name="TabControl"
+                    BorderThickness="0">
+            <TabControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="TabItem.Visibility" Value="Collapsed" />
+                </Style>
+            </TabControl.ItemContainerStyle>
+            <TabItem Margin="0">
+                <controller:Scheme />
+            </TabItem>
+            <TabItem Margin="0">
+                <controller:Precision />
+            </TabItem>
+            <TabItem Margin="0">
+
+                <Grid Background="White" Margin="5,0,5,5">
+                    <Label Content=" 设置 " FontSize="18" Margin="10" />
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

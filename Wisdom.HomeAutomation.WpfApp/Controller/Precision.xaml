@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Wisdom.HomeAutomation.WpfApp.Controller.Precision"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wisdom.HomeAutomation.WpfApp.Controller"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             DataContext="{Binding Precision,Source={StaticResource Locator}}">
+    <UserControl.Resources>
+        <Style TargetType="TextBox" >
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate  TargetType="{x:Type TextBox}">
+                        <Border BorderBrush="#FFCDCDCD" BorderThickness="1" CornerRadius="4">
+                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Label" x:Key="PrecisionLable">
+            <Setter Property="Height" Value="130"></Setter>
+            <Setter Property="Width" Value="300"></Setter>
+            <Setter Property="Margin" Value="15"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Label">
+                        <Border BorderThickness="1" BorderBrush="#669B9B9B" CornerRadius="6" >
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Content="烟台东方威思顿" FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                                <Label Grid.Row="1" Foreground="#FF4AB6A7" Content="0.05%" FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Border Background="White" Margin="5,0,5,5" BorderThickness="1" BorderBrush="#FFCDCDCD"
+                CornerRadius="8,15,15,8">
+            <Grid Height="Auto" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="10*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="误差" FontSize="18" ></Label>
+                <Label Grid.Row="1" Grid.Column="0" Content="参比电压" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="220V" IsEnabled="False" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ></TextBox>
+
+                <Label Grid.Row="1" Grid.Column="2" Content="规格" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
+                <TextBox Grid.Row="1" Grid.Column="3"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></TextBox>
+
+                <Label Grid.Row="1" Grid.Column="4" Content="脉冲常数" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
+                <TextBox Grid.Row="1" Grid.Column="5"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></TextBox>
+
+                <Label Grid.Row="1" Grid.Column="6" Content="频率" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></Label>
+                <TextBox Grid.Row="1" Grid.Column="7" Text="50Hz"  IsEnabled="False" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></TextBox>
+                <Label Grid.Row="3" Grid.Column="0" Content="电表精度" FontSize="18" ></Label>
+                <WrapPanel Orientation="Horizontal" VerticalAlignment="Top" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="9">
+                        <Label   Style="{StaticResource PrecisionLable}"></Label>
+                        <Label   Style="{StaticResource PrecisionLable}"></Label>
+                        <Label   Style="{StaticResource PrecisionLable}"></Label>
+                        <Label   Style="{StaticResource PrecisionLable}"></Label>
+                        <Label   Style="{StaticResource PrecisionLable}"></Label>
+                        <Label   Style="{StaticResource PrecisionLable}"></Label>
+                   </WrapPanel>
+
+            </Grid>
+        </Border>
+        </Grid>
+</UserControl>

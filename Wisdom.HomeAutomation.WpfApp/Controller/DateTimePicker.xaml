@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Wisdom.HomeAutomation.WpfApp.Controller.DateTimePicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wisdom.HomeAutomation.WpfApp.Controller"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"  DataContextChanged="DateTimePicker_OnDataContextChanged">
+
+    <Grid>
+        <Border BorderThickness="1" BorderBrush="Black">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="3"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="3"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox Name="textbox_hour" BorderThickness="0" TextChanged="numtextboxchanged" SelectionChanged="textbox_hour_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Column="0"></TextBox>
+                <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">:</TextBlock>
+                <TextBox Name="textbox_minute"  BorderThickness="0" TextChanged="numtextboxchanged" SelectionChanged="textbox_hour_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Grid.Column="2"></TextBox>
+                <TextBlock Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center">:</TextBlock>
+                <TextBox Name="textbox_second"  BorderThickness="0" TextChanged="numtextboxchanged" SelectionChanged="textbox_hour_SelectionChanged" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  Grid.Column="4"></TextBox>
+                <Grid Grid.Column="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button Name="button_up" Click="button_up_Click" Grid.Row="0" FontSize="5">▲</Button>
+                    <Button Name="button_down" Click="button_down_Click" Grid.Row="1" FontSize="5">▼</Button>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+
+
+</UserControl>

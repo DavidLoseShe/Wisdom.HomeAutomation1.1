@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="Wisdom.HomeAutomation.WpfApp.Controller.CustomListButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d"
+             d:DesignHeight="100" d:DesignWidth="80"
+             DataContext="{Binding Main.HomeApplianceesViewModel,Source={StaticResource Locator}}">
+    <UserControl.Resources>
+        <ControlTemplate TargetType="{x:Type CheckBox}" x:Key="CheckBox">
+
+            <Border x:Name="border" BorderThickness="1" BorderBrush="#FFCDCDCD" CornerRadius="8,8,8,8"
+                    HorizontalAlignment="Center" VerticalAlignment="Top" Padding="0"
+                    Width="60" Height="80">
+                <Grid>
+                    <Image Name="img" VerticalAlignment="Top" HorizontalAlignment="Right" Height="20" Width="20"
+                           Margin="5,5,2,5" />
+                    <Image Name="img1" Source="{Binding Image }" Width="Auto" Height="Auto"
+                           VerticalAlignment="Stretch" Margin="15,25,15,25" />
+                    <Label Name="lable" VerticalAlignment="Bottom" Content="{Binding Name}"
+                           VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                           HorizontalAlignment="Center" />
+
+                </Grid>
+            </Border>
+
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="false">
+                    <Setter TargetName="img1" Property="Source" Value="{Binding Image }" />
+                    <Setter TargetName="lable" Property="Foreground" Value="#FF000000" />
+                    <Setter Property="Background" TargetName="border" Value="#FFFFFFFF" />
+                </Trigger>
+                <Trigger Property="IsChecked" Value="true">
+                    <Setter TargetName="border" Property="BorderThickness" Value="0" />
+                    <Setter TargetName="img1" Property="Source" Value="{Binding OpenImage }" />
+                    <Setter TargetName="img" Property="Source" Value="../Img/true.png" />
+                    <Setter TargetName="lable" Property="Foreground" Value="#FFFFFFFF" />
+                    <Setter Property="Background" TargetName="border" Value="#FF27ADA3" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter TargetName="border" Property="BorderThickness" Value="0" />
+                    <Setter TargetName="img1" Property="Source" Value="{Binding OpenImage }" />
+                    <Setter Property="Background" TargetName="border" Value="#FF27ADA3" />
+                    <Setter TargetName="lable" Property="Foreground" Value="#FFFFFFFF" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+    <ListBox Padding="5" IsSynchronizedWithCurrentItem="True" Name="ListBox"
+             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+             SelectedIndex="0" HorizontalAlignment="Left" BorderThickness="0"
+             SelectionMode="Multiple" ItemsSource="{Binding HomeAppliances,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <Grid >
+                    <CheckBox Template="{DynamicResource CheckBox}"
+                              Command="{Binding  DataContext.OpenCloseCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
+                              CommandParameter="{Binding RelativeSource={x:Static RelativeSource.Self}}"
+                              IsChecked="{Binding IsOpen,UpdateSourceTrigger=PropertyChanged}" Tag="{Binding Id}" >
+                    </CheckBox>
+                </Grid>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+        <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel IsItemsHost="True" />
+            </ItemsPanelTemplate>
+        </ListBox.ItemsPanel>
+        <ListBox.ItemContainerStyle>
+
+            <Style TargetType="ListBoxItem">
+                <!-- 设置控件模板 -->
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  TextBlock.Foreground="{TemplateBinding Foreground}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <!-- 设置触发器 -->
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="true">
+                        <Setter Property="Background" Value="#00FFFFFF" />
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="true">
+                        <Setter Property="Background" Value="#00FFFFFF" />
+
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ListBox.ItemContainerStyle>
+    </ListBox>
+
+</UserControl>

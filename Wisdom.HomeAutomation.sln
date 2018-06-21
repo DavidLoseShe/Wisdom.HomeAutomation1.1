@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wisdom.HomeAutomation.WpfApp", "Wisdom.HomeAutomation.WpfApp\Wisdom.HomeAutomation.WpfApp.csproj", "{60046FC2-6DDA-437F-8E5C-E59322C8E7E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Driver", "Driver", "{D12EB5C5-D6B2-4CD1-B66C-882CA9AE8238}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wisdom.HomeAutomation.Rs485Drivers", "Wisdom.HomeAutomation.Rs485Drivers\Wisdom.HomeAutomation.Rs485Drivers.csproj", "{2A9C2C2A-EDE7-40F1-AC14-F78AEC628864}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wisdom.HomeAutomation.Sw16Drivers", "Wisdom.HomeAutomation.Sw16Drivers\Wisdom.HomeAutomation.Sw16Drivers.csproj", "{29163A59-7767-45BE-9317-988B31A681EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Util", "Util", "{54A3B47E-771C-4859-9F65-194D007F051B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wisdom.QuartzJob", "Wisdom.QuartzJob\Wisdom.QuartzJob.csproj", "{C8E499AD-F52D-400C-BD06-69C06C261EC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wisdom.HomeAutomation.Dal", "Wisdom.HomeAutomation.Dal\Wisdom.HomeAutomation.Dal.csproj", "{6E9FC981-7966-4762-9AFF-66696E0B044B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60046FC2-6DDA-437F-8E5C-E59322C8E7E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60046FC2-6DDA-437F-8E5C-E59322C8E7E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60046FC2-6DDA-437F-8E5C-E59322C8E7E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60046FC2-6DDA-437F-8E5C-E59322C8E7E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A9C2C2A-EDE7-40F1-AC14-F78AEC628864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A9C2C2A-EDE7-40F1-AC14-F78AEC628864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A9C2C2A-EDE7-40F1-AC14-F78AEC628864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A9C2C2A-EDE7-40F1-AC14-F78AEC628864}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29163A59-7767-45BE-9317-988B31A681EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29163A59-7767-45BE-9317-988B31A681EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29163A59-7767-45BE-9317-988B31A681EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29163A59-7767-45BE-9317-988B31A681EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8E499AD-F52D-400C-BD06-69C06C261EC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8E499AD-F52D-400C-BD06-69C06C261EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8E499AD-F52D-400C-BD06-69C06C261EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8E499AD-F52D-400C-BD06-69C06C261EC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E9FC981-7966-4762-9AFF-66696E0B044B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E9FC981-7966-4762-9AFF-66696E0B044B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E9FC981-7966-4762-9AFF-66696E0B044B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E9FC981-7966-4762-9AFF-66696E0B044B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2A9C2C2A-EDE7-40F1-AC14-F78AEC628864} = {D12EB5C5-D6B2-4CD1-B66C-882CA9AE8238}
+		{29163A59-7767-45BE-9317-988B31A681EA} = {D12EB5C5-D6B2-4CD1-B66C-882CA9AE8238}
+		{C8E499AD-F52D-400C-BD06-69C06C261EC5} = {54A3B47E-771C-4859-9F65-194D007F051B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23C47B74-42E1-4FB3-B376-1D8219D2CB24}
+	EndGlobalSection
+EndGlobal

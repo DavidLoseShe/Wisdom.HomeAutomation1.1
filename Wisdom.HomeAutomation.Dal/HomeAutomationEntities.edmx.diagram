@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="83e34bb603a747e0abc501dde731f1a5" Name="Diagram1">
+        <EntityTypeShape EntityType="HomeAutomationModel.t_CommandType" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeAutomationModel.t_DetailScheme" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeAutomationModel.t_HomeAppliances" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeAutomationModel.t_Scheme" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeAutomationModel.v_DtailScheme" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="HomeAutomationModel.FK_t_CommandType_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeAutomationModel.FK_t_DetailScheme_0_0" ManuallyRouted="false" />
+        <AssociationConnector Association="HomeAutomationModel.FK_t_DetailScheme_1_0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
