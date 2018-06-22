@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using AgileToDo;
 using Wisdom.HomeAutomation.WpfApp.ViewModel;
 
 namespace Wisdom.HomeAutomation.WpfApp.Controller
@@ -62,23 +62,45 @@ namespace Wisdom.HomeAutomation.WpfApp.Controller
 
             if ( checkBox.IsChecked == true)
             {
-                var result = UMessageBox.Show( "请确认启动方案");
+                var result = UMessageBox.Show( "确认启动当前方案?");
                 if (result == false|| ComboBox.SelectedItem==null)
                 {
                     checkBox.IsChecked = false;
                     return;
                 }
+                Control.Visibility = Visibility.Collapsed;
                 this.RemainTimeRow.Visibility = Visibility.Visible;
                 return;
             }
 
-            var result1 = UMessageBox.Show("请确认停止方案");
+            var result1 = UMessageBox.Show("是否立即停止所有方案？");
             if (result1 == false)
             {
                 checkBox.IsChecked = true;
                 return;
             }
+            Control.Visibility = Visibility.Visible;
             RemainTimeRow.Visibility = Visibility.Collapsed;
+        }
+    }
+
+    public class TimeConverter : IValueConverter
+    {
+        /* 数据从Source到Targe时，Convert被调用 */
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value==null)
+            {
+                return null;
+            }
+            var secends = (int)value;
+            var timeSpan =new TimeSpan(0,0,secends);
+            return $"{timeSpan.Hours} 时{timeSpan.Minutes}分{timeSpan.Seconds}秒";
+        }
+        //数据从Targe到Source时，ConvertBack被调用
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

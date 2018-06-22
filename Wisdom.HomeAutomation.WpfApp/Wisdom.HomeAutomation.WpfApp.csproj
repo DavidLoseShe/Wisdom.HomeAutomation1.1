@@ -141,6 +141,9 @@
     <Compile Include="Controller\Scheme.xaml.cs">
       <DependentUpon>Scheme.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UTimePicker.xaml.cs">
+      <DependentUpon>UTimePicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\DetailSchemeModel.cs" />
     <Compile Include="ViewModel\HomeAppliancesViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -182,6 +185,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="UMessageBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UTimePicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

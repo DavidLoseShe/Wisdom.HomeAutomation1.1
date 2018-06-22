@@ -1,9 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
 
-
-namespace AgileToDo
+namespace Wisdom.HomeAutomation.WpfApp
 {
     /// <summary>
     /// UMessageBox.xaml 的交互逻辑
@@ -13,7 +11,7 @@ namespace AgileToDo
         /// <summary>
         /// 禁止在外部实例化
         /// </summary>
-        private UMessageBox()
+        public UMessageBox()
         {
             InitializeComponent();
         }

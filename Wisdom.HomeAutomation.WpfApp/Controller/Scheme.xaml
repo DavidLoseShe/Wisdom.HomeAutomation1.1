@@ -9,6 +9,8 @@
              d:DesignHeight="300" d:DesignWidth="300" 
              DataContext="{Binding Scheme,Source={StaticResource Locator}}">
     <UserControl.Resources>
+        <!--数据格式转换-->
+        <local:TimeConverter x:Key="TimeConverter"/>
         <CollectionViewSource x:Key="Departments" Source="{Binding HomeAppliances}" />
         <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
             <Border Margin="0" CornerRadius="5,5,5,5">
@@ -397,7 +399,7 @@
             </Setter>
         </Style>
         <Style TargetType="TextBox" x:Key="Text">
-            <Setter Property="MinWidth" Value="60"></Setter>
+            <Setter Property="MinWidth" Value="80"></Setter>
             <Setter Property="BorderThickness" Value="2"></Setter>
             <Setter Property="BorderBrush" Value="#FF4AB6A7"></Setter>
         </Style>
@@ -463,16 +465,35 @@
                                                 DisplayMemberPath="Name" SelectedValuePath="Id" TextBinding="{Binding DtailScheme.HomeAppliancesName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         </DataGridComboBoxColumn>
                         <DataGridTextColumn  IsReadOnly="True"  Header="工作模式" Width="*" Binding="{Binding CommandName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                        <DataGridTextColumn  IsReadOnly="false" EditingElementStyle="{StaticResource Text}" Header="延迟时间(s)" Width="*" Binding="{Binding DtailScheme.WaitTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
-                        </DataGridTextColumn>
-                        <DataGridTextColumn  IsReadOnly="false" Header="运行时长(s)" Width="*" EditingElementStyle="{StaticResource Text}" Binding="{Binding DtailScheme.RunTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
-<!--                            <DataGridTemplateColumn.CellTemplate>-->
-<!--                                <DataTemplate>-->
-<!--                                    <local:DateTimePicker DataContext="{Binding DtailScheme.RunTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></local:DateTimePicker>-->
-<!--                                </DataTemplate>-->
-<!--                                </DataGridTemplateColumn.CellTemplate>-->
-                        </DataGridTextColumn>
-                        <DataGridTemplateColumn    Header="操作" Width="*" >
+                        <DataGridTemplateColumn  IsReadOnly="false"  Header="延迟时间(s)" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Width="80" Content="{Binding DtailScheme.WaitTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource TimeConverter}}" >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                <i:InvokeCommandAction  Command="{Binding DataContext.InstallWaitTimeCommand ,RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1 }}" 
+                                                                        CommandParameter="{Binding DtailScheme.DetailSchemeId}"></i:InvokeCommandAction>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Label>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn  IsReadOnly="True" Header="运行时长(s)" Width="*"   >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Width="80" Content="{Binding DtailScheme.RunTime,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,Converter={StaticResource TimeConverter}}" >
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                <i:InvokeCommandAction  Command="{Binding DataContext.InstallRunTimeCommand ,RelativeSource={RelativeSource AncestorType=UserControl, AncestorLevel=1 }}" 
+                                                                                                    CommandParameter="{Binding DtailScheme.DetailSchemeId}"></i:InvokeCommandAction>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </Label>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn  x:Name="Control"  Header="操作" Width="*" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -504,4 +525,6 @@
         </Border>
     </Grid>
 </UserControl>
+
+
 

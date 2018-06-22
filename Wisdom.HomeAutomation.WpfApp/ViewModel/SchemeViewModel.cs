@@ -8,7 +8,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using AgileToDo;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Wisdom.HomeAutomation.Dal;
@@ -59,12 +58,12 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
             {
                 if (SchemeState)
                 {
-                    UMessageBox.Show($"请先停止方案", false);
+                    UMessageBox.Show($"请先停止方案!", false);
                     return;
                 }
                 if (SchemeNameEidtState)
                 {
-                    
+
                     return;
                 }
                 using (var db = new HomeAutomationEntities())
@@ -92,14 +91,14 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
             {
                 if (SchemeState)
                 {
-                    UMessageBox.Show($"请先停止方案", false);
+                    UMessageBox.Show($"请先停止方案!", false);
                     return;
                 }
                 if (SchemeNameEidtState)
                 {
                     return;
                 }
-                var result = UMessageBox.Show("确定删除当前方案吗");
+                var result = UMessageBox.Show("确定删除当前方案吗?");
                 if (result == false)
                 {
                     return;
@@ -148,9 +147,9 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
                     return;
                 }
                 //是否选择方案，执行方案是否为空
-                if (Scheme == null )
+                if (Scheme == null)
                 {
-                    UMessageBox.Show($"当前没有选中方案", false);
+                    UMessageBox.Show($"当前没有选中方案!", false);
                     return;
                 }
                 //是否正在编辑方案
@@ -183,10 +182,10 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
                     //        ControllerHomeAutomation(value.Key, false);
                     //    }
                     //}
-                    
+
                     foreach (var value in DetailSchemes)
                     {
-                        
+
                         value.RunSchemeState = false;
                         value.SchemevisibiState = "Hidden";
                         value.Cancel.Cancel();
@@ -240,13 +239,14 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
                             //}
                             //执行时长
                             var runTime = 0;
-                             
-                        //等待结束
+
+                            //等待结束
                             while (runTime < value.DtailScheme.RunTime)
                             {
-                               
-                                var timeSpan =new TimeSpan(0,0, value.DtailScheme.RunTime - runTime-1);
-                                value.SchemeTime = timeSpan.Hours.ToString()+" h "+timeSpan.Minutes+" m "+timeSpan.Seconds+" s";
+
+                                var timeSpan = new TimeSpan(0, 0, value.DtailScheme.RunTime - runTime - 1);
+                                value.SchemeTime = timeSpan.Hours.ToString() + " h " + timeSpan.Minutes + " m " +
+                                                   timeSpan.Seconds + " s";
                                 try
                                 {
                                     value.Cancel.Token.ThrowIfCancellationRequested();
@@ -263,7 +263,7 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
                             //关闭电器
                             //try
                             //{
-                                
+
                             //    AsyncControllerHomeAutomation(value.DtailScheme.HomeAppliancesId, false);
                             //}
                             //catch (Exception e)
@@ -286,7 +286,7 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
                 if (DetailSchemes.FirstOrDefault(x => x.DtailScheme.HomeAppliancesName == "选择电器") != null)
                 {
                     //提示选择电器
-                    UMessageBox.Show($"请选择电器", false);
+                    UMessageBox.Show($"请选择电器!", false);
                     return;
                 }
                 using (var db = new HomeAutomationEntities())
@@ -296,9 +296,9 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
                     //遍历详细方案
                     for (var i = 0; i < DetailSchemes.Count; i++)
                     {
-                        if (DetailSchemes[i].DtailScheme.WaitTime <= 0 || DetailSchemes[i].DtailScheme.RunTime <= 0)
+                        if (DetailSchemes[i].DtailScheme.WaitTime <0 || DetailSchemes[i].DtailScheme.RunTime <= 0)
                         {
-                            UMessageBox.Show($"{DetailSchemes[i].DtailScheme.HomeAppliancesName} 时间运行太短", false);
+                            UMessageBox.Show($"{DetailSchemes[i].DtailScheme.HomeAppliancesName} 时间运行太短!", false);
                             return;
                         }
                         //id= 100表示没有选中
@@ -310,7 +310,8 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
                         for (var j = 0; j < i; j++)
                         {
                             //根据电器名称相同，断定同一电器
-                            if (DetailSchemes[i].DtailScheme.HomeAppliancesName != DetailSchemes[j].DtailScheme.HomeAppliancesName)
+                            if (DetailSchemes[i].DtailScheme.HomeAppliancesName !=
+                                DetailSchemes[j].DtailScheme.HomeAppliancesName)
                             {
                             }
                             //判断同一电器启动，一分钟间隔以上
@@ -323,7 +324,7 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
                             }
                             else
                             {
-                                UMessageBox.Show($"{DetailSchemes[i].DtailScheme.HomeAppliancesName} 时间冲突", false);
+                                UMessageBox.Show($"{DetailSchemes[i].DtailScheme.HomeAppliancesName} 运行时间冲突或者间隔太近!", false);
                                 return;
                             }
                         }
@@ -415,7 +416,7 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
             {
                 if (SchemeState)
                 {
-                    UMessageBox.Show($"请先停止方案", false);
+                    UMessageBox.Show($"请先停止方案!", false);
                     return;
                 }
                 if (SchemeName == null)
@@ -452,9 +453,9 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
                         //遍历详细方案
                         for (var i = 0; i < DetailSchemes.Count; i++)
                         {
-                            if (DetailSchemes[i].DtailScheme.WaitTime<=0|| DetailSchemes[i].DtailScheme.RunTime <=0)
+                            if (DetailSchemes[i].DtailScheme.WaitTime <= 0 || DetailSchemes[i].DtailScheme.RunTime <= 0)
                             {
-                                UMessageBox.Show($"{DetailSchemes[i].DtailScheme.HomeAppliancesName} 时间运行太短",false);
+                                UMessageBox.Show($"{DetailSchemes[i].DtailScheme.HomeAppliancesName} 时间运行太短!", false);
                                 return;
                             }
                             //id= 100表示没有选中
@@ -466,20 +467,22 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
                             for (var j = 0; j < i; j++)
                             {
                                 //根据电器名称相同，断定同一电器
-                                if (DetailSchemes[i].DtailScheme.HomeAppliancesName != DetailSchemes[j].DtailScheme.HomeAppliancesName)
+                                if (DetailSchemes[i].DtailScheme.HomeAppliancesName !=
+                                    DetailSchemes[j].DtailScheme.HomeAppliancesName)
                                 {
                                 }
                                 //判断同一电器启动，一分钟间隔以上
                                 else if (DetailSchemes[i].DtailScheme.WaitTime >
                                          (DetailSchemes[j].DtailScheme.RunTime +
                                           DetailSchemes[j].DtailScheme.WaitTime) + 60 ||
-                                         DetailSchemes[i].DtailScheme.RunTime + DetailSchemes[i].DtailScheme.WaitTime + 60 <
+                                         DetailSchemes[i].DtailScheme.RunTime + DetailSchemes[i].DtailScheme.WaitTime +
+                                         60 <
                                          DetailSchemes[j].DtailScheme.WaitTime)
                                 {
                                 }
                                 else
                                 {
-                                    UMessageBox.Show($"{DetailSchemes[i].DtailScheme.HomeAppliancesName} 时间冲突", false);
+                                    UMessageBox.Show($"{DetailSchemes[i].DtailScheme.HomeAppliancesName} 时间冲突!", false);
                                     return;
                                 }
                             }
@@ -511,7 +514,56 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
             }));
 
             #endregion
+
+            #region 编辑运行时间
+
+            InstallRunTimeCommand = new RelayCommand<long>(detailSchemeId =>
+            {
+                if (SchemeEidtState) return;
+                var detailScheme =
+                    DetailSchemes.FirstOrDefault(x => x.DtailScheme.DetailSchemeId == detailSchemeId);
+                if (detailScheme == null) return;
+                var result = UTimePiker.ChooseEquals(detailScheme.DtailScheme.RunTime);
+                var dtailScheme = new v_DtailScheme()
+                {
+                    DetailSchemeId = detailSchemeId,
+                    HomeAppliancesId = detailScheme.DtailScheme.HomeAppliancesId,
+                    HomeAppliancesName = detailScheme.DtailScheme.HomeAppliancesName,
+                    RunTime = result,
+                    SchemeId = detailScheme.DtailScheme.SchemeId,
+                    SchemeName = detailScheme.DtailScheme.SchemeName,
+                    WaitTime = detailScheme.DtailScheme.WaitTime
+                };
+                detailScheme.DtailScheme = dtailScheme;
+            });
+
+            #endregion
+            #region 编辑等待时间
+
+            InstallWaitTimeCommand = new RelayCommand<long>(detailSchemeId =>
+            {
+                if (SchemeEidtState) return;
+                var detailScheme =
+                    DetailSchemes.FirstOrDefault(x => x.DtailScheme.DetailSchemeId == detailSchemeId);
+                if (detailScheme == null) return;
+                var result = UTimePiker.ChooseEquals(detailScheme.DtailScheme.WaitTime);
+                var dtailScheme = new v_DtailScheme()
+                {
+                    DetailSchemeId = detailSchemeId,
+                    HomeAppliancesId = detailScheme.DtailScheme.HomeAppliancesId,
+                    HomeAppliancesName = detailScheme.DtailScheme.HomeAppliancesName,
+                    RunTime = detailScheme.DtailScheme.RunTime,
+                    SchemeId = detailScheme.DtailScheme.SchemeId,
+                    SchemeName = detailScheme.DtailScheme.SchemeName,
+                    WaitTime = result
+                };
+                detailScheme.DtailScheme = dtailScheme;
+            });
+
+            #endregion
+            
         }
+
 
         private string _schemeBtnName = "开始";
 
@@ -554,8 +606,8 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
         /// </summary>
         public bool SchemeList
         {
-            get { return _schemeList;}
-            set { Set(()=>SchemeList,ref _schemeList,value); }
+            get { return _schemeList; }
+            set { Set(() => SchemeList, ref _schemeList, value); }
         }
 
         /// <summary>
@@ -705,7 +757,14 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
         /// 编辑方案
         /// </summary>
         public ICommand UpdataChooseDatailScheme { get; }
-
+        /// <summary>
+        /// 修改运行时间
+        /// </summary>
+        public ICommand InstallRunTimeCommand { get; }
+        /// <summary>
+        /// 修改等待时间
+        /// </summary>
+        public ICommand InstallWaitTimeCommand { get; }
         /// <summary>
         /// 刷新当前方案列表
         /// </summary>
@@ -715,7 +774,7 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
             using (var db = new HomeAutomationEntities())
             {
                 if (Scheme == null) return;
-                var detailSchemes = db.v_DtailScheme.Where(x => x.SchemeId == Scheme.Id).ToList();
+                var detailSchemes = db.v_DtailScheme.Where(x => x.SchemeId == Scheme.Id).OrderBy(x=>x.WaitTime).ToList();
                 foreach (var value in detailSchemes)
                 {
                     DetailSchemes.Add(new DetailSchemeModel()
@@ -730,7 +789,7 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
         /// </summary>
         /// <param name="address"></param>
         /// <param name="state"></param>
-        public async void AsyncControllerHomeAutomation(int address,bool state)
+        public async void AsyncControllerHomeAutomation(int address, bool state)
         {
             var driver = new Rs485Driver();
             try
@@ -812,7 +871,7 @@ namespace Wisdom.HomeAutomation.WpfApp.ViewModel
         /// </summary>
         /// <param name="address"></param>
         /// <param name="state"></param>
-        public  void ControllerHomeAutomation(int address, bool state)
+        public void ControllerHomeAutomation(int address, bool state)
         {
             var driver = new Rs485Driver();
             try
